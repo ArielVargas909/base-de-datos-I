@@ -28,7 +28,7 @@ POWER POINT de la parte de conocimientos
 https://github.com/ArielVargas909/base-de-datos-I/blob/main/HITO3/Bases%20de%20Datos-%20SQL.pptx
 ```
 
-## 📖 Base De Daro SQL
+## 📖 Base De Dato SQL
 
 Parte practica
 
