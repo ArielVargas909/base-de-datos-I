@@ -1,0 +1,184 @@
+create database H4_funciones;
+use H4_funciones;
+create table estudiantes(
+id_est integer  identity primary key not null,
+nombres varchar(30) not null,
+apellidos varchar(30)not null,
+edad integer not null,
+fono integer not null,
+email varchar(100) not null,
+direccion varchar(100) not null,
+genero varchar(20) not null,
+licencia_conducir bit not null,
+ id_esc integer not null,
+foreign key (id_esc)references escuela(id_esc)
+);
+select* from estudiantes;
+
+INSERT INTO estudiantes (nombres, apellidos, edad, fono, email, direccion, genero,licencia_conducir,id_esc)
+  VALUES ('Miguel' ,'Gonzales Veliz', 20, 2832115, 'miguel@gmail.com', 'Av. 6 de Agosto', 'masculino',0,1);
+INSERT INTO estudiantes (nombres, apellidos, edad, fono, email, direccion, genero,licencia_conducir,id_esc)
+  VALUES ('Sandra' ,'Mavir Uria', 25, 2832116, 'sandra@gmail.com', 'Av. 6 de Agosto', 'femenino',1,2);
+INSERT INTO estudiantes (nombres, apellidos, edad, fono, email, direccion, genero,licencia_conducir,id_esc)
+  VALUES ('Joel' ,'Adubiri Mondar', 30, 2832117, 'joel@gmail.com', 'Av. 6 de Agosto', 'masculino',0,1);
+INSERT INTO estudiantes (nombres, apellidos, edad, fono, email, direccion, genero,licencia_conducir,id_esc)
+  VALUES ('Andrea' ,'Arias Ballesteros', 21, 2832118, 'andrea@gmail.com', 'Av. 6 de Agosto', 'femenino',0,1);
+INSERT INTO estudiantes (nombres, apellidos, edad, fono, email, direccion, genero,licencia_conducir,id_esc)
+  VALUES ('Santos' ,'Montes Valenzuela', 24, 2832119, 'santos@gmail.com', 'Av. 6 de Agosto', 'masculino',1,4);
+  insert into estudiantes (nombres, apellidos, edad, fono, email, direccion, genero,licencia_conducir,id_esc)
+  values('Pedrito' ,'Montes Perreira', 24, 2832119, 'santos@gmail.com', 'Av. 6 de Agosto', 'masculino',1,3);
+    insert into estudiantes (nombres, apellidos, edad, fono, email, direccion, genero,licencia_conducir,id_esc)
+  values('Marta' ,'Molinedo Mendoza', 24, 2832119, 'santos@gmail.com', 'Av. 6 de Agosto', 'femenino',0,3);
+
+ select *
+ from estudiantes as est;
+
+ select COUNT(est.id_est) as numero_de_estudiantes
+ from estudiantes as est;
+
+
+ select MIN(est.edad) as minima_edad__de_los_estudantes
+ from estudiantes as est;
+ 
+ select count(est.genero) estudianmtes_de_genero_femenino
+ from estudiantes as est
+ where est.genero='femenino';
+ 
+ select sum(est.edad) suma_de_las_edades
+ from estudiantes as est;
+
+
+ select AVG(est.edad) promedio_de_las_edades 
+ from estudiantes as est;
+
+  select count(est.licencia_conducir) 
+ from estudiantes as est;
+  select Max(est.edad) as max_edad__de_los_estudantes
+ from estudiantes as est;
+
+ select Max(est.edad) as max_edad__de_los_estudantes
+ from estudiantes as est
+ where est.genero='masculino' or est.genero='femenino';
+ select*from estudiantes;
+  select count(est.id_est) 
+ from estudiantes as est
+ where est.apellidos like '%el%' and est.genero='masculino';
+
+   select count(est.id_est)  
+ from estudiantes as est
+ where est.edad between 21 and 29 and est.licencia_conducir=1 ;
+
+ create table escuela(
+ id_esc integer identity primary key not null,
+ nombre varchar(100)not null,
+ direccion varchar(30)not null,
+ turno varchar(20)not null,
+
+ );
+
+ insert into escuela(nombre,direccion,turno)
+ values('San Simon','Cochabamba','manana'),
+ ('Andres bello','El Alto','manana-tarde'),
+ ('Amor de Dios fe y alegria','El Alto','manana-tarde'),
+ ('Don Bosco','La Paz','manana-tarde');
+
+ select* from estudiantes;
+ select* from escuela;
+ select count(est.id_esc)
+ from estudiantes as est
+ where est.licencia_conducir=1 and est.edad<20;
+ 
+ 
+ select count(est.id_est)
+ from escuela as ecs
+ inner join estudiantes as est on est.id_esc = ecs.id_esc
+ where ecs.nombre='Amor de Dios fe y alegria';
+ select* from estudiantes;
+ select* from escuela;
+  select count(est.id_est)
+ from estudiantes as est
+ inner join escuela as esc on est.id_esc= esc.id_esc
+ where esc.turno='manana-tarde'
+   select* from estudiantes;
+    select* from escuela;
+  select count(est.id_est)
+ from estudiantes as est
+ inner join escuela as esc on est.id_esc=esc.id_esc
+ where est.edad>25  and esc.turno like '%tarde%'
+
+  select count(est.id_est)
+ from estudiantes as est
+ inner join escuela as esc on est.id_esc=esc.id_esc
+   
+   
+   select count(est.id_est)
+ from estudiantes as est
+ inner join escuela as esc on est.id_esc=esc.id_esc
+   
+   
+   select count(est.id_est)
+ from estudiantes as est
+ inner join escuela as esc on est.id_esc=esc.id_esc
+   
+   
+   select count(est.id_est)
+ from estudiantes as est
+ inner join escuela as esc on est.id_esc=esc.id_esc
+   select* from estudiantes;
+ select sum(est.id_est)
+ from estudiantes as est
+ where est.licencia_conducir=1;
+ create function retorno_nombre_materia()
+ returns varchar(20) as 
+ begin 
+  return 'Base de Datos I'
+
+ end;
+ select dbo.retorno_nombre_materia() as dba;
+
+alter function retorno_nombre_materia_v2()
+ returns varchar(25) as 
+ begin
+ declare @nombre varchar(25); 
+ set @nombre = 'Base de Datos III';
+ return @nombre;
+ end;
+
+ 
+select dbo.retorno_nombre_materia_v2() as dba;
+
+create function retorno_nombre_materia_v3(@nombreMateria varchar(25))
+returns varchar(25) as
+ begin 
+ declare @nombre varchar(25);
+ set @nombre=@nombreMateria;
+ return @nombre;
+ end;
+ select dbo.retorno_nombre_materia_v3('DBA I') as dba;
+
+
+alter function suma(@num1 integer,@num2 integer)
+ returns integer as 
+ begin
+ declare @respuesta integer;
+set @respuesta =20+20;
+ return @respuesta;
+ end;
+ select dbo.suma();
+
+ create function sumav2(@num1 integer,@num2 integer,@num3 integer)
+ returns integer as 
+ begin
+ declare @respuesta integer;
+ set @respuesta = @num1+@num2+@num3;
+ return @respuesta;
+ end;
+ select dbo.sumav2(10,20,3);
+  create function sumav2(@num1 integer,@num2 integer,@num3 integer)
+ returns integer as 
+ begin
+ declare @respuesta integer;
+ set @respuesta = @num1+@num2+@num3;
+ return @respuesta;
+ end;
+ select dbo.sumav2(10,20,3);
